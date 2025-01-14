@@ -1,28 +1,25 @@
-import React, { useContext} from 'react'
+import React, { useContext, useEffect} from 'react'
 // import Axios from "axios"
 import Sidebar from './MajorComponent/Sidebar'
 import MessageLayout from './MajorComponent/MessageLayout'
-import userContext from './Context/UserContext'
+import {io} from "socket.io-client"
+
 
 const App = () => {
-  // const [data, setData] = useState("")
-  // // const [user, setUser] = useState(true)
+  const socket = io("http://localhost:3001")
 
-  // const getData = async()=>{
-  //   const response =await Axios.get("http://localhost:3000/getData");
-  //   setData(response.data)
-  // }
+  useEffect(() => {
+    socket.on("connect", ()=>{
+      console.log("connected")
+      socket.emit("welcome" , `welcome to the chat : ${socket.id}`)
+    })  
 
-  // useEffect(() => {
-  //   getData()
-  // }, [])
+    socket.on("welcome" , (s)=>{console.log(s)})
+  }, [])
   
-
-  const {showSlide} = useContext(userContext)
-
+   
   return (
     <div className='flex w-[100vw]'> 
-      {/* <div>{data}</div> */}
       <Sidebar/>
       <MessageLayout/>
     </div>

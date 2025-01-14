@@ -1,19 +1,37 @@
-import express form "express"
+import express from "express";
+import {Server} from "socket.io"
+import {createServer} from "http";
+import cors from "cors";
+import dotenv from "dotenv"
+
+dotenv.config();
 
 const app = express()
-const PORT = 3000; 
+const server = createServer(app);
+const io = new Server(server , {
+    cors: {
+        origin:"http://localhost:5173",
+        methods: ["GET","POST"],
+        credentials:true,
+    }
+});
 
-app.use(cors())
 
-app.get('/Login' , (req,res)=>{
-    res.send("got login data ")
+app.use(cors());
+
+app.get("/",(req,res)=>{
+    res.send("Hello world")
+})
+
+io.on("connection",(socket)=>{
+    console.log("User connection")
+    console.log("id" , socket.id)
+    socket.emit("welcome", `Welcome to the chat : ${socket.id}`)
 })
 
 
-app.get('/getData' , (req,res)=>{
-    res.send("got login data ")
-})
+const PORT = process.env.PORT || 5000 
 
-app.listen(PORT , () =>{
-    console.log("server is live on http://localhost:"+PORT)
+server.listen(PORT , ()=>{
+    console.log(`server is running on port ${PORT}`);
 })
