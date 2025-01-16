@@ -22,9 +22,18 @@ const MessageLayout = () => {
             </div>
             <div className="MainMessage w-full h-[84%] bg-blue-600">
             </div>
-            <div className="bottomBar w-full h-[8%] bg-black">
-              <input type="text" className='w-[80]' placeholder='Message....'/>
-              <button onClick={sendMessage} className='bg-blue-500' >Send</button>
+            <div className="bottomBar px-4 flex items-center gap-4 w-full rounded-lg h-[8%] bg-black">
+              <input 
+                type="text" 
+                className='w-[90%] px-4 rounded py-1' 
+                placeholder='Message....'/
+              >
+              <button 
+                onClick={sendMessage} 
+                className='bg-blue-500 rounded-lg px-4 py-1 text-white' 
+              >
+                Send
+              </button>
             </div>
         </div>
         {showSlide && <GroupInfo/>}

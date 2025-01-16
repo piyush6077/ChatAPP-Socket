@@ -32,6 +32,19 @@ io.on("connection",(socket)=>{
 
 const PORT = process.env.PORT || 5000 
 
+import { mongoose } from "mongoose";
+
+const MongoURI = process.env.MONGOURI;
+
+mongoose.connect(MongoURI)
+    .then(()=>{
+        console.log("MongoDB connected")
+    })
+    .catch((err)=>{
+        console.log(`Error connecting to mongoDb: ${err}`)
+    })
+
+
 server.listen(PORT , ()=>{
     console.log(`server is running on port ${PORT}`);
 })
