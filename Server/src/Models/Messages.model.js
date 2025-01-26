@@ -1,0 +1,6 @@
+
+
+// senderId
+// reveiverId
+// text
+// Image

@@ -10,6 +10,7 @@ const MessageLayout = () => {
 
   const sendMessage = () =>{
     socket.emit()
+    console.log("Hello")
   }
 
   return (

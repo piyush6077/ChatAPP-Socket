@@ -6,7 +6,9 @@ import UserContextProvider from './Context/UserContextProvider.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <UserContextProvider>
-    <App />
-  </UserContextProvider>,
+  <StrictMode>
+    <UserContextProvider>
+      <App />
+    </UserContextProvider>,
+  </StrictMode>
 )
