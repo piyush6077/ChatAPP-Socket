@@ -1,6 +1,7 @@
 import { User } from "../Models/User.model.js"
 import bcrypt from "bcryptjs"
 import { generateJwtToken } from "../utils/generateToken.js"
+import cloudinary from "../utils/cloudinary.js"
 
 export const signup = async (req, res) => {
     
@@ -79,4 +80,43 @@ export const logout = async (req,res)=>{
         console.log(error)
         res.status(400).json("Something went wrong during Logout")
     }
+}
+
+// Add Multer functionality
+export const updateProfile = async (req, res)=>{
+    try {
+        const { profilePic } = req.body
+        // const userId = req.user._id
+        console.log(profilePic)
+        if(!profilePic){
+            return res.status(400).json({message:"Profile pic required"})
+        }
+
+        const uploadResponse = await cloudinary.uploader.upload(profilePic)
+        if(!uploadResponse) return res.status(400).json({message:"Error while uploading to cloudinary"})
+    
+        const user = await User.findByIdAndUpdate(
+            req.user?._id,
+            { profilePic: uploadResponse.secure_url },
+            { new: true }
+        )
+
+        return res
+        .status(200)
+        .json({sucess:"true", user , message: "Profile pic Updated"})
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({success:"false", message:"Profile pIc Update failed"})
+    }
+
+}
+
+export const checkUser = async (req, res)=>{
+    // const authUser = await User.findById(req.user._id)
+    try {
+        return res.status(200).json(req.user)
+    } catch (error) {
+    return res.status(404).json({success:"false", message:"User not found"})
+}
 }
