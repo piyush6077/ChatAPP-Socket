@@ -6,14 +6,14 @@ import cloudinary from "../utils/cloudinary.js"
 export const signup = async (req, res) => {
     
     try {
-        const {username , fullname , email , password} =  req.body
-        if (!username || !fullname || !email || !password) return res.status(400).json("All information is needed")
+        const {fullname , email , password} =  req.body
+        if (!fullname || !email || !password) return res.status(400).json("All information is needed")
     
         const existingUser = await User.findOne({email})
         if(existingUser) return res.status(400).json("user already existed")
     
         // console.log(password, fullname)
-        if(password.lenght < 6 ){
+        if(password.length < 6 ){
             return res.status(400).json("Password must contain more than 6 letter ")
         }
         // generate hashPassword
@@ -33,11 +33,11 @@ export const signup = async (req, res) => {
         if(user) {
           //JWT Token
            generateJwtToken(user._id,res)
-           await user.save()
-           res.status(200).json( {message:"user created successfully" , user})
+        //    await user.save()
+           return res.status(200).json( {message:"user created successfully" , user})
         } 
         else{
-           res.status(400).json("Error occured during signup")
+           return res.status(400).json("Error occured during signup")
         }
 
     } catch (error) {
@@ -55,16 +55,16 @@ export const login = async (req,res)=>{
 
     try {        
         const user = await User.findOne({email})
-        if(!user){
-            res.status(400).status("Fill the email and password to login")
+        if (!user) {
+            return res.status(404).json({ message: "User not found. Please sign up first." });
         }
-
+        
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
-        if(!isPasswordCorrect) return res.status(400).json({message:"Incorrect password"})
-
+        if(!isPasswordCorrect){
+            return res.status(400).json({message:"Incorrect password"})
+        }
         generateJwtToken(user._id,res) // Inefficient replace with RefreshToken and AccessToken
-
-        res.status(200).json({message:"User Login successfully", user})
+        return res.status(200).json({message:"User Login successfully", user})
 
     } catch (error) {
         console.log(error)
