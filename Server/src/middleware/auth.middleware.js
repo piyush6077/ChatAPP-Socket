@@ -18,7 +18,7 @@ export const protectedRoute = async (req,res,next)=>{
         if(!user) {
             return res.status(400).json({message:"user not found"})
         }
-
+ 
         req.user = user
         next();
 
