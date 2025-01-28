@@ -1,7 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import userContext from '../Context/UserContext'
+import { useThemeStore } from '../store/useThemeStore'
 
 const GroupInfo = () => {
+  const [theme,setPageTheme] = useState("light") 
+  const {setTheme} = useThemeStore()
+
+  const handleTheme = ()=>{
+    setPageTheme((prev)=>((prev==="dark" ? "light":"dark")))
+    setTheme(theme)
+  }
 
   const {handleGroupInfo}=useContext(userContext) 
   return (
@@ -41,6 +49,9 @@ const GroupInfo = () => {
         </div>
 
         <div className='w-full h-[200px] bg-red-500'>
+          <div className='p-2 text-lg w-full bg-green-500 flex justify-center' onClick={handleTheme}>
+            {theme === "light" ? "dark":"light"}
+          </div>
           <div className='p-2 text-lg w-full bg-green-500 flex justify-center'>
             Leave Group
           </div>

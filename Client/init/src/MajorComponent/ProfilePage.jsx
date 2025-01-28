@@ -48,7 +48,7 @@ const ProfilePage = () => {
                     
                   > 
                     <div className='bg-gray-800 rounded-full p-[6px]'>
-                      <Camera className='w-5 h-5 text-base-200 text-white'/>
+                      <Camera className='w-5 h-5 text-white'/>
                     </div>
                     <input 
                       type="file"
