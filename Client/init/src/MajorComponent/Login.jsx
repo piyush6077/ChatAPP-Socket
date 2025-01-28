@@ -103,7 +103,7 @@ return (
 
       <p className="mt-10 text-center text-sm/6 text-gray-500">
         Already Have Account?{' '}
-        <Link to="/Login" className="font-semibold text-indigo-600 hover:text-indigo-500">
+        <Link to="/Signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
           Sign-Up
         </Link>
       </p>

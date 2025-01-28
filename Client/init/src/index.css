@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.srcollbardiv::-webkit-scrollbar {
+    width: 8px; /* Set the width of the vertical scrollbar */
+    height: 8px; /* Set the height of the horizontal scrollbar */
+}
+
+.srcollbardiv::-webkit-scrollbar-button {
+    background: #ccc; /* Style for the scrollbar buttons */
+}
+
+.srcollbardiv::-webkit-scrollbar-track {
+    background: yellow; /* Background color of the track */
+}
+
+.srcollbardiv::-webkit-scrollbar-thumb {
+    background: #eee; /* Color of the scrollbar thumb */
+    border-radius: 6px; /* Add rounded corners */
+    border: 2px solid transparent; /* Add some space between thumb and track */
+    background-clip: content-box; /* Prevent the border from overlapping */
+}

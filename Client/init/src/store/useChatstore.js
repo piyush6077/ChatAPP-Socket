@@ -4,7 +4,7 @@ import { axiosInstance } from "../lib/axios"
 
 export const useChatstore = create((set)=>({
     message: [],
-    user: [],
+    users: [],
     selectedUser: null,
     isMessageLoading: false,
     isUserLoading: false,
@@ -12,8 +12,9 @@ export const useChatstore = create((set)=>({
     getUsers: async() =>{
         set({isUserLoading: true})
         try {
-            const res = await axiosInstance.get("/messages/users")
+            const res = await axiosInstance.get("/messages/user")
             set({users: res.data})
+            console.log(res.data)
         } catch (error) {
             toast.error(error.response.data.message);
         } finally{
@@ -31,5 +32,7 @@ export const useChatstore = create((set)=>({
         } finally {
             set({isMessageLoading: false})
         }
-    }
+    },
+
+    setSelectedUser: async(selectedUser) => set({selectedUser: selectedUser})
 }))

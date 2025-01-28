@@ -7,7 +7,6 @@ import { LogOut } from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import {Link} from "react-router-dom"
 import { User } from "lucide-react"
-
 // const socket = io.connect("http://localhost:3001")
 
 const MessageLayout = () => {
@@ -48,7 +47,6 @@ const MessageLayout = () => {
                 placeholder='Message....'/
               >
               <button 
-                onClick="" 
                 className='bg-blue-500 rounded-lg px-4 py-1 text-white' 
               >
                 Send
