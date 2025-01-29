@@ -1,6 +1,7 @@
 import {create} from "zustand"
 import toast from "react-hot-toast"
 import { axiosInstance } from "../lib/axios"
+import { ChartNoAxesColumnDecreasing } from "lucide-react"
 
 export const useChatstore = create((set,get)=>({
     message: [],
@@ -23,12 +24,16 @@ export const useChatstore = create((set,get)=>({
     },
 
     getMessages: async(userId)=>{
+        const {selectedUser, message} = get();
+
         set({isMessageLoading: true})
         try {
             const res = await axiosInstance.get(`/messages/${userId}`)
+            console.log("response data from getMessages" , res.data)
             set({message: res.data})
         } catch (error) {
-            toast.error(error.response.data.message);
+            console.log(error)
+            toast.error(error.response.data.message || "error getting the messages");
         } finally {
             set({isMessageLoading: false})
         }
@@ -46,6 +51,7 @@ export const useChatstore = create((set,get)=>({
         try {
             const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
             console.log(messageData);
+            console.log("message from selectedUsr res : " ,res.data)
             set({ message: [...message, res.data] });
         } catch (error) {
             console.log(error)

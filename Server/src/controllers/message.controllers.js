@@ -20,14 +20,16 @@ export const getUserChatHistory = async (req, res)=>{
 
     try {
         const {id:userToChatId} = req.params
-        const myId = req.user._id
+        const myId = req.user?._id
     
         const message = await Message.find({
             $or: [
                 {senderId: myId, receiverId: userToChatId},
-                {receiverId: userToChatId, senderId: myId}
+                {receiverId: myId, senderId: userToChatId}
             ]
         })
+        console.log('myId:', myId, 'userToChatId:', userToChatId);
+
 
         return res.status(200).json(message)
     } catch (error) {

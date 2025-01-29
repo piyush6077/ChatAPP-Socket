@@ -34,7 +34,7 @@ const MessageLayout = () => {
   }, [selectedUser, getMessages]);
 
   return (
-    <div className='bg-purple-800 w-[72%] h-[100vh] relative' >
+    <div className='w-[72%] h-[100vh] relative' >
         <div className='flex flex-col h-full w-full' >
             <div className="TopBar w-full h-[8%] bg-yellow-500 items-center gap-4 px-4 justify-end flex">
               <div className="w-8 h-8 bg-purple-600" onClick={handleGroupInfo}>             
@@ -53,44 +53,7 @@ const MessageLayout = () => {
                 ) 
               }
             </div>
-            {/* <MessageContainer/> */}
-                <div className="MainMessage w-full h-[84%] bg-blue-600 overflow-y-auto">
-                    {message.map((messages)=>(
-                        <div 
-                            key={messages._id}
-                            className={`chat ${messages.senderId === authUser._id ? "chat-end": "chat-start"}`}
-                        >
-                            <div className="chat-image avatar">
-                                <div className='size-10 rounded-full border'>
-                                    <img 
-                                        src={
-                                            messages.senderId === authUser._id 
-                                            ? authUser.profilePic || "avatar.png" 
-                                            : selectedUser.profilePic || "avatar.png"}
-                                        alt="profile Pic" 
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <time className="text-xs opacity-50 ml-1">
-                                    {formatMessageTime(messages.createdAt)}
-                                </time>
-                            </div>
-                            <div className='chat-bubble flex flex-col'>
-                                {messages.image && (
-                                    <img 
-                                        src={messages.image} 
-                                        alt="Attachment"
-                                        className='sm:max-w-[200] w-52 h-48 rounded-md mb-2' 
-                                    />
-                                )}
-                                {messages.text && <p>{messages.text}</p>}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            
-
+            <MessageContainer/>
             <InputMessage/>
         </div>
         {showSlide && <GroupInfo/>}

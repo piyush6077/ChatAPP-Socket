@@ -43,7 +43,7 @@ const Sidebar = () => {
                             <div className='w-[20%]'>
                                 <div className='w-[90%] min-w-14 relative bg-black h-14 rounded-full'>
                                     <img
-                                        src={users.profilePic || "./avatar.png"}
+                                        src={user.profilePic || "./avatar.png"}
                                         className='w-full h-full rounded-full'
                                         />
                                      

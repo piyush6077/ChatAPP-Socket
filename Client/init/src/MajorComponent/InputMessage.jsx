@@ -50,7 +50,7 @@ const InputMessage = () => {
 
 
     return (
-            <div className="bottomBar relative px-4 flex items-center gap-4 w-full rounded-lg h-[8%] bg-black">
+            <div className="bottomBar relative px-4 flex items-center gap-4 w-full rounded-lg h-[10%] ">
               {imagePreview && (
                 <div className='mb-3 flex items-center gap-2 absolute -top-20 left-1'>
                     <div className='relative'>
@@ -70,11 +70,11 @@ const InputMessage = () => {
                 </div>
               )}
              
-            <form onSubmit={handleSendMessage} className='flex'>
+            <form onSubmit={handleSendMessage} className='flex gap-3 items-center justify-center w-full'>
               <input 
                 type="text" 
                 value={text}
-                className='w-[90%] px-4 rounded py-1' 
+                className='w-[80%] h-10 px-4 rounded-3xl ' 
                 placeholder='Message....'
                 onChange={(e)=>setText(e.target.value)}
             />
@@ -95,11 +95,11 @@ const InputMessage = () => {
               </button>  
              
               <button 
-                className='bg-blue-500 rounded-lg px-4 py-1 text-white' 
+                className='bg-blue-500 size-12 flex items-center rounded-full px-4 py-1 text-white' 
                 type='submit'
                 disabled={!text.trim() && !imagePreview}
                 >
-                <Send size={20}/>
+                <Send size={28}/>
               </button>
             </form> 
             
