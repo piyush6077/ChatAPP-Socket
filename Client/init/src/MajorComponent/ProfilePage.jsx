@@ -75,7 +75,7 @@ const ProfilePage = () => {
                     </label>
                     <div className="mt-2">
                       <div className="block w-full h-9 p-2 bg-white rounded-lg text-black text-sm">
-                        <p>{authUser?.fullname}1</p>
+                        <p>{authUser?.fullname}</p>
                       <div/>
                     </div>                  
                     </div>
@@ -94,7 +94,7 @@ const ProfilePage = () => {
                 </div>
               </div>
 
-              <div className='text-zinc-400 text-sm w-full mt-10 justify-center flex flex-col items-center'>
+              <div className='text-zinc-400 text-sm w-full mt- justify-center flex flex-col items-center'>
                   <h1 className='text-lg text-gray-800 font-semibold'>Account Info</h1>
                   <div className='space-y-3 text-sm w-full'>
                     <div className='flex items-center justify-between py-2 border-b w-full border-zinc-700'>

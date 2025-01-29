@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema(
             ref: "User",
             required: true 
         },
-        reveiverId: {
+        receiverId: {
             type:mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true
@@ -15,8 +15,7 @@ const messageSchema = new mongoose.Schema(
         text: {
             type:String,
         },
-        Image: {
-          
+        image: {
             type: String,
         }
     },{

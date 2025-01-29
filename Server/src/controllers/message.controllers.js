@@ -1,5 +1,6 @@
 import { User } from "../Models/User.model.js"
 import { Message } from "../Models/Messages.model.js"
+import cloudinary from "../utils/cloudinary.js"
 
 export const generateUserForSideBar = async (req, res)=>{
     try {
@@ -16,6 +17,7 @@ export const generateUserForSideBar = async (req, res)=>{
 }
 
 export const getUserChatHistory = async (req, res)=>{
+
     try {
         const {id:userToChatId} = req.params
         const myId = req.user._id
@@ -44,7 +46,10 @@ export const sendMessage = async ( req, res)=>{
         if(image){
             const uploadResponse = await cloudinary.uploader.upload(image)
             imageUrl = uploadResponse.secure_url;
+            console.log('Uploaded Image URL:', imageUrl);
         }
+        // console.log('Uploaded Image URL:', imageUrl);
+
 
         const newMessage = new Message({
             senderId,
