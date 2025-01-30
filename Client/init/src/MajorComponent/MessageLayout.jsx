@@ -25,13 +25,17 @@ const MessageLayout = () => {
   }
   
   // Chatcontainer Logic 
-  const {message ,getMessages, isMessageLoading , selectedUser} = useChatstore();
+  const {message ,getMessages, isMessageLoading , selectedUser,subscribeToMessages,unsubscribeFromMessages} = useChatstore();
   
   useEffect(() => {
     if (selectedUser && selectedUser._id) {
       getMessages(selectedUser._id);
+    
     }
-  }, [selectedUser, getMessages]);
+    subscribeToMessages();
+
+    return ()=>unsubscribeFromMessages();
+  }, [selectedUser, getMessages,subscribeToMessages,unsubscribeFromMessages]);
 
   return (
     <div className='w-[72%] h-[100vh] relative' >

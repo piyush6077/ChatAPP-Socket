@@ -6,13 +6,14 @@ import { useAuthStore } from '../store/useAuthStore'
 const Sidebar = () => {
     const {getUsers, users , selectedUser , setSelectedUser , isUserLoading } =  useChatstore()
 
-    const {isOnlineUser} = useAuthStore()
+    const {isOnlineUsers} = useAuthStore()
 
     useEffect(() => {
         // console.log(selectedUser)
         getUsers();
       }, [getUsers]);
     
+      console.log("onlineUsers : " , isOnlineUsers)
     // if(isUserLoading) return <div>User Loading.... </div> // make Ui better 
     return (
 
@@ -47,7 +48,7 @@ const Sidebar = () => {
                                         className='w-full h-full rounded-full'
                                         />
                                      
-                      {isOnlineUser.includes(user._id) && (
+                      {isOnlineUsers.includes(user._id) && (
                         <span
                           className="absolute bottom-2 right-0 size-2 bg-green-500
                         rounded-full ring-1 ring-zinc-900"

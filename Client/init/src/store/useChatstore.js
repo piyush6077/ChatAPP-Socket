@@ -1,7 +1,8 @@
 import {create} from "zustand"
 import toast from "react-hot-toast"
 import { axiosInstance } from "../lib/axios"
-import { ChartNoAxesColumnDecreasing } from "lucide-react"
+// import { ChartNoAxesColumnDecreasing } from "lucide-react"
+import {useAuthStore} from "./useAuthStore.js"
 
 export const useChatstore = create((set,get)=>({
     message: [],
@@ -57,6 +58,25 @@ export const useChatstore = create((set,get)=>({
             console.log(error)
             toast.error(error.response?.data?.message || "Error sending message");
         }
+    },
+
+    subscribeToMessages: ()=>{
+        const {selectedUser} = get()
+        if(!selectedUser) return ;
+
+        const socket = useAuthStore.getState().socket
+    
+        //todo to optimize 
+        socket.on("newMessage", (newMessage)=>{
+            set({
+                message: [...get().message, newMessage]
+            })
+        })
+    },
+
+    unsubscribeFromMessages: ()=>{
+        const socket = useAuthStore.getState().socket
+        socket.off("newMessage")
     },
 
     setSelectedUser: async(selectedUser) => {
